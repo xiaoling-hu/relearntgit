@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bubble.css">
+</head>
+<body>
+<div class="arr_box">
+    <span >数组随机生成：</span>
+    <input type="number" id="number" placeholder="请输入一个数字">
+    <button id="btn">生成数组</button>
+</div>
+<div class="arr_box">
+    <span>数组输入：</span>
+    <input type="text" id="array" placeholder="请输入一个数组">
+   <button id="btn2">点击按钮</button>
+</div>
+<div class = "button-list">
+   
+    <button id = "insertStart" class = "button">直接插入排序</button>
+    <button id = "shellStart" class = "button">希尔排序</button>
+    <button id = "selectStart" class = "button">选择排序</button>
+    <button id = "heapStart" class = "button">堆排序</button>
+    <button id = "quickStart" class = "button">快速排序</button>
+    <button id = "reset" class = "button">重置</button>
+</div>
+<div class = "stage" id="domTree">
+</div>
+<script>
+    /*var foo = document.getElementById("foo");
+    var list = foo.getElementsByTagName("a");
+    for(var i=0;len=list.length,i<len;i++){
+        list[i].onclick=function(){
+            alert(this.getAttribute("href"));
+            return false
+        }
+    }*/
+    let timer = null;
+    /* let arr = [1,2,8,4,3,6,5];//待排序数组*!/!*!/*/
+    /*   createTree();*/
+    window.onload = function(){
+        let doms = document.getElementsByClassName("bubble"); //doms对象
+        let btns = document.getElementsByClassName("button"); //button
+        let btn=document.getElementById("btn");
+        let arr_sort = document.getElementById("arr_sort_btn");
+        //点击生成数组按钮
+            btn.onclick=function(){
+                let number = document.getElementById("number").value;
+               let arr =  createArr(number);    //生成随机数组
+                createTree(arr);
+                domStyle(doms,arr); //显示球体样式
+              /*  document.getElementById("number").value="";*/
+            };
+         //点击确认排序按钮
+            arr_sort.onclick = function(){
+                getArray();       //获取输入的数组
+                domStyle(doms,arr); //显示球体样式
+            }
+
+        //绑定事件
+        btns[0].onclick = function(){
+            domOpera(doms,bubbleSort(arr),this);
+        }
+        btns[1].onclick = function(){
+            domOpera(doms,insertSort(arr),this);
+        }
+        btns[2].onclick = function(){
+            domOpera(doms,shellSort(arr),this);
+        }
+        btns[3].onclick = function(){
+            domOpera(doms,selectSort(arr),this);
+        }
+        btns[4].onclick = function(){
+          /*  createTree(doms);//生成完成二叉树样式*/
+            domOpera(doms,heapSort(arr),this);
+        }
+        btns[5].onclick = function(){
+            domOpera(doms,quickSort(arr),this);
+        }
+        //重置
+        btns[6].onclick = function(){
+            clearTimeout(timer);
+            /*  for(let i=0; i<9; i++){
+                  if(btns[i].hasAttribute("disabled")){
+                      btns[i].removeAttribute("disabled");
+                      break;
+                  }
+              }*/
+            reset(doms);
+        }
+    }
+</script>
+<script src="js/animateSort.js"></script>
+<script src="js/bubbleSort.js"></script>
+<script src="js/heapSort.js"></script>
+<script src="js/insertSort.js"></script>
+<script src="js/quickSort.js"></script>
+<script src="js/selectSort.js"></script>
+<script src="js/shellSort.js"></script>
+</body>
+
+</html>
